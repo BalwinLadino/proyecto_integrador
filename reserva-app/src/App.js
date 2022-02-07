@@ -1,28 +1,61 @@
 import React from "react";
-import { BrowserRouter, NavLink, Routes, Route } from "react-router-dom";
+//import {Routes, NavLink,  Route } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
-import Formulario from "./components/Formulario";
+//import Formulario from "./components/Formulario";
 import dentista from "./assets/img/dentista.jpg";
-import { Center, Square, Circle, HStack, Box } from "@chakra-ui/react";
+import { Box, Text} from "@chakra-ui/react";
+//import { extendTheme } from "@chakra-ui/react";
+import "@fontsource/actor";
+import fondo from "./assets/img/fondo_odonto.jpg"
+
+//import { Center, Square, Circle, HStack, Box } from "@chakra-ui/react";
 
 import { useState } from "react";
+
+//import {Heading} from '@chakra-ui/react'
 
 function App() {
   const [iniciarSesion, setIniciarSesion] = useState(false);
   const [usuarioActivo, setUsuarioActivo] = useState("");
+  const [reservas, setReservas] = useState([]);
 
   return (
-   
-      <BrowserRouter>
-        <div className="container mt-5 ">
-       
+    <div
+      style={{
+        backgroundImage: `url(${fondo})`,
+        height: "100%",
+        width: "100%",
+        margin: 0,
+        backgroundSize: "cover",
+      }}
+    >
+      <>
+        {/* <NavLink to="/formulario">INICIO</NavLink> */}
+
+        <div className="container  ">
+          <Box>
             <header>
-              <div className="p-3 mb-2 bg-info text-white text-hide ">
-                <img src={dentista} alt="" height="200rem" />
-                <h1>Clinica Odontologíca ODONTOFAMY</h1>
-                <h2>Salud para tu sonrisa</h2>
-              </div>
+              <Box
+                style={{
+                  backgroundImage: `url(${dentista})`,
+                  height: "30vh",
+                  width: "100%",
+                  backgroundSize: "cover",
+                }}
+              >
+                <div className="p-3 mb-2 ml-30">
+                  <Text color="white" fontSize="30">
+                    Clinica Odontologíca
+                  </Text>
+                  <Text color="white" fontSize="60">
+                    ODONTO FAMY
+                  </Text>
+                  <Text color="white" fontSize="20">
+                    Salud para tu sonrisa
+                  </Text>
+                </div>
+              </Box>
               <hr></hr>
               <nav>
                 <div className="btn-group l-5 ">
@@ -40,7 +73,7 @@ function App() {
                 </div>
               </nav>
             </header>
-        
+          </Box>
 
           <main>
             <div className="App">
@@ -53,6 +86,8 @@ function App() {
                 <Home
                   usuarioActivo={usuarioActivo}
                   setIniciarSesion={setIniciarSesion}
+                  reservas={reservas}
+                  setReservas={setReservas}
                 />
               )}
             </div>
@@ -65,13 +100,27 @@ function App() {
            */}
           </main>
         </div>
-        <footer className="container mt-5 bg-info">
-          <h2>Clinica Odontofamy (c)</h2>
-          <h3>Balwin Ladino</h3>
-        </footer>
-      </BrowserRouter>
-    
+        <Box bg="blue.600" ml="20" mr="20">
+          <footer className="container mt-5 ">
+            <Text fontSize="30px" color="white" as="em">
+              Clinica Odontofamy - Derechos reservados
+            </Text>
+            <br/>
+            <Text fontSize="20px" color="white" as="em">
+              Presentado por: Balwin Ladino
+            </Text>
+          </footer>
+        </Box>
+
+        {/* 
+        <Route path="/" element={<Home />} />
+        <Route path="/formulario" element={<Formulario />} />
+      </Routes> */}
+      </>
+    </div>
   );
+  
 }
+
 
 export default App;

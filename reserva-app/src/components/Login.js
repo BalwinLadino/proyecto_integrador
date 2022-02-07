@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import { usuarios } from "../data/usuarios";
 import registro from "./img/registro.JPG"
+import {
+  Box,
+  Text,
+  Center,
+  Input,
+  VStack,
+  useColorModeValue,
+  Heading,
+  InputGroup
+} from "@chakra-ui/react";
 //import { Navigate } from "react-router-dom";
 
 const Login = (props) => {
   const setIniciarSesion = props.setIniciarSesion;
   const setUsuarioActivo = props.setUsuarioActivo;
+  const colorBg = useColorModeValue("green.200");
 
   const [inputUsuario, setInputUsuario] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -65,84 +76,89 @@ const Login = (props) => {
     console.log(usuarios);
   };
   return (
-    <div>
-      <div className="container">
-        <div className="row ">
-          <div className="col-sm-4 bg-info mb-5 p-2">
-            <h3>Ingresar o Registrar</h3>
-            {formReg && (
-              <span>
-                <b>Registra tus datos aqui : </b>{" "}
-              </span>
-            )}
-
-            <form onSubmit={handleOnSubmitLogin}>
-              <span>Usuario:</span>
-              <input
-                type="text"
-                value={inputUsuario}
-                onChange={(e) => setInputUsuario(e.target.value)}
-                placeholder="Usuario"
-                className="form-control"
-              />
-              {formReg && <span>Correo: </span>}
-              {formReg && (
-                <input
-                  value={inputCorreo}
-                  onChange={(e) => setInputCorreo(e.target.value)}
-                  type="mail"
-                  placeholder="Correo"
-                  className="form-control"
-                />
-              )}
-
-              <span>Contraseña:</span>
-              <input
-                type="password"
-                value={inputPassword}
-                onChange={(e) => setInputPassword(e.target.value)}
-                placeholder="Constraseña"
-                className="form-control"
-              />
-              <div className="row p-3">
-                <div className="col-sm-4">
-                  <input
-                    type="submit"
-                    className="btn btn-dark"
-                    value={formReg ? "Crear Usuario" : "ingresar"}
-                  />
-                </div>
-                <div className="col-sm-4">
-                  <p> </p>
-                </div>
-                <div className="col-sm-4">
-                  {formReg ? (
-                    ""
-                  ) : (
-                    <button
-                      type="button"
-                      className="btn btn-light"
-                      onClick={() => setFormReg(!formReg)}
-                    >
-                      Registrar
-                    </button>
+    <Center>
+      <VStack spacing={8}>
+        <Heading size="lg">Ingresar o Registrar</Heading>
+        <Box bg = {colorBg}
+        >
+          <div>
+            <div className="container">
+              <div className="row ">
+                <div className="p-2">
+                  {formReg && (
+                    <span>
+                      <b>Registra tus datos aqui : </b>{" "}
+                    </span>
                   )}
+
+                  <form onSubmit={handleOnSubmitLogin}>
+                    <Box w="100%">
+                      <span>Usuario:</span>
+
+                      <input
+                        type="text"
+                        value={inputUsuario}
+                        onChange={(e) => setInputUsuario(e.target.value)}
+                        placeholder="Usuario"
+                        className="form-control"
+                      />
+                    </Box>
+                    {formReg && <span>Correo: </span>}
+                    {formReg && (
+                      <input
+                        value={inputCorreo}
+                        onChange={(e) => setInputCorreo(e.target.value)}
+                        type="mail"
+                        placeholder="Correo"
+                        className="form-control"
+                      />
+                    )}
+
+                    <span>Contraseña:</span>
+                    <input
+                      type="password"
+                      value={inputPassword}
+                      onChange={(e) => setInputPassword(e.target.value)}
+                      placeholder="Constraseña"
+                      className="form-control"
+                    />
+                    <div>
+                      <Center>
+                        <InputGroup p="2" m="1">
+                          <div>
+                            <input
+                              type="submit"
+                              className="btn btn-dark"
+                              value={formReg ? "Crear Usuario" : "Ingresar"}
+                            />
+                          </div>
+                        </InputGroup>
+                        <div></div>
+                        <InputGroup p="2" m="1">
+                          <div>
+                            {formReg ? (
+                              ""
+                            ) : (
+                              <button
+                                type="button"
+                                className="btn btn-warning"
+                                onClick={() => setFormReg(!formReg)}
+                              >
+                                Registrar
+                              </button>
+                            )}
+                          </div>
+                        </InputGroup>
+                      </Center>
+                    </div>
+                  </form>
                 </div>
               </div>
-            </form>
-
-            {/* <p>
-              {inputUsuario} - {inputPassword}{" "}
-            </p> */}
+            </div>
           </div>
-          <div className="col-sm-1 bg-"></div>
-          <div className="col-sm-4 mb-5">
-            
-            <img src={registro} alt="" height="250rem" /> 
-          </div>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </VStack>
+    </Center>
   );
 };
 
