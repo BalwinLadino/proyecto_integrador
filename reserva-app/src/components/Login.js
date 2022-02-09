@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { usuarios } from "../data/usuarios";
-import registro from "./img/registro.JPG"
+//import registro from "./img/registro.JPG"
 import {
   Box,
-  Text,
   Center,
-  Input,
   VStack,
   useColorModeValue,
   Heading,
-  InputGroup
+  InputGroup,
+  Button,
 } from "@chakra-ui/react";
 //import { Navigate } from "react-router-dom";
 
@@ -18,33 +17,33 @@ const Login = (props) => {
   const setUsuarioActivo = props.setUsuarioActivo;
   const colorBg = useColorModeValue("green.200");
 
-  const [inputUsuario, setInputUsuario] = useState("");
+  const [inputUser, setinputUser] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const [formReg, setFormReg] = useState(false);
-  const [inputCorreo, setInputCorreo] = useState("");
+  const [inputMail, setinputMail] = useState("");
 
   const handleOnSubmitLogin = (e) => {
     e.preventDefault();
     //const navigate = Navigate;
 
     if (
-      inputUsuario.trim() !== "" &&
+      inputUser.trim() !== "" &&
       inputPassword.trim() !== "" &&
-      inputCorreo.trim() !== ""
+      inputMail.trim() !== ""
     ) {
       const sesion = usuarios.find((usuario) => {
-        if (usuario.usuario === inputUsuario) {
+        if (usuario.usuario === inputUser) {
           return usuario;
         }
       });
       if (!sesion) {
         usuarios.push({
           id: 4,
-          usuario: inputUsuario,
+          usuario: inputUser,
           password: inputPassword,
         });
-        setInputUsuario("");
-        setInputCorreo("");
+        setinputUser("");
+        setinputMail("");
         setInputPassword("");
         setFormReg(false);
         alert("Usuario registrado");
@@ -52,10 +51,10 @@ const Login = (props) => {
         alert("Este usuario ya existe: ");
       }
     } else {
-      if (inputUsuario.trim() !== "" && inputPassword.trim() !== "") {
+      if (inputUser.trim() !== "" && inputPassword.trim() !== "") {
         const sesion = usuarios.find((usuario) => {
           if (
-            usuario.usuario === inputUsuario &&
+            usuario.usuario === inputUser &&
             usuario.password === inputPassword
           ) {
             return usuario;
@@ -79,8 +78,7 @@ const Login = (props) => {
     <Center>
       <VStack spacing={8}>
         <Heading size="lg">Ingresar o Registrar</Heading>
-        <Box bg = {colorBg}
-        >
+        <Box bg={colorBg} borderRadius="xl">
           <div>
             <div className="container">
               <div className="row ">
@@ -97,8 +95,8 @@ const Login = (props) => {
 
                       <input
                         type="text"
-                        value={inputUsuario}
-                        onChange={(e) => setInputUsuario(e.target.value)}
+                        value={inputUser}
+                        onChange={(e) => setinputUser(e.target.value)}
                         placeholder="Usuario"
                         className="form-control"
                       />
@@ -106,8 +104,8 @@ const Login = (props) => {
                     {formReg && <span>Correo: </span>}
                     {formReg && (
                       <input
-                        value={inputCorreo}
-                        onChange={(e) => setInputCorreo(e.target.value)}
+                        value={inputMail}
+                        onChange={(e) => setinputMail(e.target.value)}
                         type="mail"
                         placeholder="Correo"
                         className="form-control"
@@ -139,13 +137,13 @@ const Login = (props) => {
                             {formReg ? (
                               ""
                             ) : (
-                              <button
+                              <Button
                                 type="button"
-                                className="btn btn-warning"
+                                className=""
                                 onClick={() => setFormReg(!formReg)}
                               >
                                 Registrar
-                              </button>
+                              </Button>
                             )}
                           </div>
                         </InputGroup>

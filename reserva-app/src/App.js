@@ -43,6 +43,7 @@ function App() {
                   width: "100%",
                   backgroundSize: "cover",
                 }}
+                borderRadius="xl"
               >
                 <div className="p-3 mb-2 ml-30">
                   <Text color="white" fontSize="30">
@@ -100,12 +101,12 @@ function App() {
            */}
           </main>
         </div>
-        <Box bg="blue.600" ml="20" mr="20">
+        <Box bg="blue.600" ml="20" mr="20" borderRadius="xl">
           <footer className="container mt-5 ">
             <Text fontSize="30px" color="white" as="em">
               Clinica Odontofamy - Derechos reservados
             </Text>
-            <br/>
+            <br />
             <Text fontSize="20px" color="white" as="em">
               Presentado por: Balwin Ladino
             </Text>

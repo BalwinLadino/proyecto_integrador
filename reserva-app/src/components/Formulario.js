@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Box, Text, Center, Input, Stack } from "@chakra-ui/react";
+import { Box, Text, Center, Input, Stack, Button } from "@chakra-ui/react";
 
 export const Formulario = (props) => {
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [identificacion, setIdentificacion] = useState("");
-  const [tipoReserva, setTipoReserva] = useState("");
-  const [fechaHora, setFechaHora] = useState("");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [identification, setIdentification] = useState("");
+  const [reserve, setReserve] = useState("");
+  const [dateTime, setDateTime] = useState("");
 
   //arreglo state
   const reservas = props.reservas;
@@ -19,29 +19,29 @@ export const Formulario = (props) => {
 
     if (
       generarId.trim() !== "" &&
-      nombre.trim() !== "" &&
-      apellido.trim() !== "" &&
-      identificacion.trim() !== "" &&
-      fechaHora.trim() !== "" &&
-      tipoReserva.trim() !== ""
+      name.trim() !== "" &&
+      lastname.trim() !== "" &&
+      identification.trim() !== "" &&
+      dateTime.trim() !== "" &&
+      reserve.trim() !== ""
     ) {
       const reservaTmp = {
         id: generarId,
-        nombre_usuario: nombre,
-        apellido_usuario: apellido,
-        dni: identificacion,
-        fecha_reserva: fechaHora,
-        tipo_reserva: tipoReserva,
+        name_usuario: name,
+        lastname_usuario: lastname,
+        dni: identification,
+        fecha_reserva: dateTime,
+        tipo_reserva: reserve,
       };
 
       //debemos guardar la reserva en el arreglo state
       setReservas([...reservas, reservaTmp]);
 
-      setNombre("");
-      setApellido("");
-      setIdentificacion("");
-      setFechaHora("");
-      setTipoReserva("");
+      setName("");
+      setLastname("");
+      setIdentification("");
+      setDateTime("");
+      setReserve("");
 
       alert("Reserva guardada");
 
@@ -58,7 +58,7 @@ export const Formulario = (props) => {
           <Center fontSize="30px">Entrada Formulario para reserva</Center>
           <Center fontSize="25px">Reserve su Cita</Center>
           <Center>
-            <Box bg="green.100">
+            <Box bg="green.100" borderRadius="xl">
               <div className="container p-3">
                 <form onSubmit={handleOnSubmit}>
                   <Center>
@@ -69,8 +69,8 @@ export const Formulario = (props) => {
                           type="text"
                           placeholder="Ingrese Nombre"
                           className="form-control"
-                          value={nombre}
-                          onChange={(e) => setNombre(e.target.value)}
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                         />
 
                         <span>Agregar Apellido:</span>
@@ -78,18 +78,18 @@ export const Formulario = (props) => {
                           type="text"
                           placeholder="Ingrese Apellido"
                           className="form-control"
-                          value={apellido}
-                          onChange={(e) => setApellido(e.target.value)}
+                          value={lastname}
+                          onChange={(e) => setLastname(e.target.value)}
                         />
                       </Box>
 
                       <div>
-                        <span>Agregar No. Identificacion: </span>
+                        <span>Agregar No. identificacion: </span>
                         <input
                           type="number"
-                          placeholder="No. Identidifcacion"
-                          value={identificacion}
-                          onChange={(e) => setIdentificacion(e.target.value)}
+                          placeholder="No. Identificacion"
+                          value={identification}
+                          onChange={(e) => setIdentification(e.target.value)}
                         />
                       </div>
 
@@ -97,15 +97,15 @@ export const Formulario = (props) => {
                         <span>Fecha y hora: </span>
                         <input
                           type="datetime-local"
-                          value={fechaHora}
-                          onChange={(e) => setFechaHora(e.target.value)}
+                          value={dateTime}
+                          onChange={(e) => setDateTime(e.target.value)}
                         />
                       </div>
 
                       <span>Tipo de Reserva: </span>
                       <select
-                        value={tipoReserva}
-                        onChange={(e) => setTipoReserva(e.target.value)}
+                        value={reserve}
+                        onChange={(e) => setReserve(e.target.value)}
                       >
                         <option className="bg-info">Elije una</option>
                         <option value="Valoracion">Valoraciòn</option>
@@ -115,9 +115,14 @@ export const Formulario = (props) => {
                       </select>
 
                       {/*<input type="submit" value="Guardar" />*/}
-                      <button type="submit" className="btn btn-primary">
+                      <Button
+                        type="submit"
+                        className="btn btn-primary"
+                        colorScheme="teal"
+                        align="center"
+                      >
                         Enviar
-                      </button>
+                      </Button>
                     </Stack>
                   </Center>
                 </form>
@@ -130,7 +135,7 @@ export const Formulario = (props) => {
             <Text fontSize="30px"> Lista de Reservas </Text>
           </Box>
         </Center>
-        <Box p={4} bg="white">
+        <Box p={4} bg="white" borderRadius="xl" mb="20">
           <div className="container p-10 mt-5rem">
             <div className="row">
               <div className="col-md-">
@@ -140,7 +145,7 @@ export const Formulario = (props) => {
                       <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
-                        <th scope="col">DNI</th>
+                        <th scope="col">Identificacion</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Tipo de reserva</th>
                       </tr>
@@ -150,8 +155,8 @@ export const Formulario = (props) => {
                       {reservas.map((reserva) => {
                         return (
                           <tr key={reserva.id}>
-                            <td>{reserva.nombre_usuario}</td>
-                            <td>{reserva.apellido_usuario}</td>
+                            <td>{reserva.name_usuario}</td>
+                            <td>{reserva.lastname_usuario}</td>
                             <td>{reserva.dni}</td>
                             <td>{reserva.fecha_reserva}</td>
                             <td>{reserva.tipo_reserva}</td>
@@ -161,7 +166,7 @@ export const Formulario = (props) => {
                     </tbody>
                   </table>
                 ) : (
-                  <h2>NO HAY RESERVA EN ESTE MOMENTO</h2>
+                  <h2>NO HAY RESERVAS EN ESTE MOMENTO</h2>
                 )}
               </div>
             </div>
